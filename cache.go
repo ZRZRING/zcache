@@ -2,9 +2,10 @@ package zcache
 
 import (
 	"sync"
-	"zcache/zcache/lru"
+	"zcache/lru"
 )
 
+// 实例化 LRU，并将操作封装为并发安全的方法
 type cache struct {
 	mutex      sync.Mutex
 	lru        *lru.Cache

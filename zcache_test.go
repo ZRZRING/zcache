@@ -3,13 +3,24 @@ package zcache
 import (
 	"fmt"
 	"log"
+	"reflect"
 	"testing"
 )
 
+func TestGetter(t *testing.T) {
+	var f Getter = GetterFunc(func(key string) ([]byte, error) {
+		return []byte(key), nil
+	})
+	expect := []byte("key")
+	if v, _ := f.Get("key"); !reflect.DeepEqual(v, expect) {
+		t.Errorf("expect %v, got %v", expect, v)
+	}
+}
+
 var db = map[string]string{
-	"Tom":  "630",
-	"Jack": "589",
-	"Sam":  "567",
+	"zrzring": "60",
+	"qwaszx":  "70",
+	"qweasd":  "80",
 }
 
 func TestGetGroup(t *testing.T) {
@@ -27,9 +38,11 @@ func TestGetGroup(t *testing.T) {
 			return nil, fmt.Errorf("%s not found", key)
 		}))
 	for k, v := range db {
+		// 在缓存为空的情况下，能够通过回调函数获取到源数据
 		if msg, err := z.Get(k); err != nil || msg.String() != v {
 			t.Fatalf("failed to get value, err:%v", err)
 		}
+		// 在缓存已经存在的情况下，是否直接从缓存中获取
 		if _, err := z.Get(k); err != nil || loadCounts[k] > 1 {
 			t.Fatalf("cache %s miss", k)
 		}
