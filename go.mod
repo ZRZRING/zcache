@@ -1,4 +1,4 @@
-module github.com/ZRZRING/zcache
+module zcache
 
 go 1.24.1
 
