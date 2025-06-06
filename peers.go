@@ -7,15 +7,7 @@ type PeerPicker interface {
 	PickPeer(key string) (peer PeerGetter, ok bool)
 }
 
-type PeerPickerPB interface {
-	PickPeerPB(key string) (peer PeerGetterPB, ok bool)
-}
-
 // PeerGetter 从远程节点获取缓存值，每个远程节点都实现了这个接口，用于获取缓存值
 type PeerGetter interface {
-	Get(group, key string) ([]byte, error)
-}
-
-type PeerGetterPB interface {
-	GetPB(in *pb.Request, out *pb.Response) error
+	Get(in *pb.Request, out *pb.Response) error
 }

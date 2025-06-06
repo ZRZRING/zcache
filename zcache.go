@@ -108,20 +108,12 @@ func (g *Group) getLocally(key string) (ByteView, error) {
 }
 
 func (g *Group) getFromPeer(peer PeerGetter, key string) (ByteView, error) {
-	bytes, err := peer.Get(g.name, key)
-	if err != nil {
-		return ByteView{}, err
-	}
-	return ByteView{b: bytes}, nil
-}
-
-func (g *Group) getFromPeerPB(peer PeerGetterPB, key string) (ByteView, error) {
 	req := &pb.Request{
 		Group: g.name,
 		Key:   key,
 	}
 	res := &pb.Response{}
-	err := peer.GetPB(req, res)
+	err := peer.Get(req, res)
 	if err != nil {
 		return ByteView{}, err
 	}
