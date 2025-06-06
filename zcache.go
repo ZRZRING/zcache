@@ -121,7 +121,7 @@ func (g *Group) getFromPeerPB(peer PeerGetterPB, key string) (ByteView, error) {
 		Key:   key,
 	}
 	res := &pb.Response{}
-	err := peer.Get(req, res)
+	err := peer.GetPB(req, res)
 	if err != nil {
 		return ByteView{}, err
 	}

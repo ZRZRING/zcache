@@ -106,7 +106,7 @@ func (p *HTTPPool) Set(peers ...string) {
 	}
 }
 
-// PickPeer 包装了一致性哈希算法的 Get() 方法，根据具体的 key，选择节点，返回节点对应的 HTTP 客户端
+// PickPeer 包装了一致性哈希算法的 GetPB() 方法，根据具体的 key，选择节点，返回节点对应的 HTTP 客户端
 func (p *HTTPPool) PickPeer(key string) (PeerGetter, bool) {
 	p.mu.Lock()
 	defer p.mu.Unlock()
@@ -192,3 +192,4 @@ func (h *httpGetter) GetPB(in *pb.Request, out *pb.Response) (err error) {
 
 // 静态类型检查
 var _ PeerGetter = (*httpGetter)(nil)
+var _ PeerGetterPB = (*httpGetter)(nil)

@@ -149,8 +149,8 @@ var file_zcachepb_proto_goTypes = []any{
 	(*Response)(nil), // 1: zcachepb.Response
 }
 var file_zcachepb_proto_depIdxs = []int32{
-	0, // 0: zcachepb.GroupCache.Get:input_type -> zcachepb.Request
-	1, // 1: zcachepb.GroupCache.Get:output_type -> zcachepb.Response
+	0, // 0: zcachepb.GroupCache.GetPB:input_type -> zcachepb.Request
+	1, // 1: zcachepb.GroupCache.GetPB:output_type -> zcachepb.Response
 	1, // [1:2] is the sub-list for method output_type
 	0, // [0:1] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
